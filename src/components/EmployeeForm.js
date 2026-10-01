@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import '../EmployeeForm.css';
+
 class EmployeeForm extends Component {
     constructor(props) {
         super(props);
+
         this.state = {
             name: '',
             email: '',
@@ -22,7 +24,15 @@ class EmployeeForm extends Component {
     handleSubmit = (event) => {
         event.preventDefault();
 
-        console.log(this.state);
+        const employee = {
+            EmployeeId: Date.now(),
+            name: this.state.name,
+            email: this.state.email,
+            jobTitle: this.state.jobTitle,
+            department: this.state.department
+        };
+
+        this.props.addEmployee(employee);
 
         this.setState({
             name: '',
@@ -37,7 +47,10 @@ class EmployeeForm extends Component {
             <div>
                 <h2>Add Employee</h2>
 
-                <form className="employee-form" onSubmit={this.handleSubmit}>
+                <form
+                    className="employee-form"
+                    onSubmit={this.handleSubmit}
+                >
                     <div>
                         <label>Name:</label>
                         <input
@@ -78,7 +91,9 @@ class EmployeeForm extends Component {
                         />
                     </div>
 
-                    <button type="submit">Add Employee</button>
+                    <button type="submit">
+                        Add Employee
+                    </button>
                 </form>
             </div>
         );

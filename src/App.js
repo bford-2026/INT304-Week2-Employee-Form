@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import EmployeeForm from './components/EmployeeForm';
@@ -11,6 +12,30 @@ function About() {
 }
 
 function App() {
+    const [employees, setEmployees] = useState(() => {
+        const savedEmployees = localStorage.getItem('employees');
+
+        if (savedEmployees) {
+            return JSON.parse(savedEmployees);
+        }
+
+        return [];
+    });
+
+    const saveData = (employeeData) => {
+        localStorage.setItem(
+            'employees',
+            JSON.stringify(employeeData)
+        );
+    };
+
+    const addEmployee = (employee) => {
+        const updatedEmployees = [...employees, employee];
+
+        setEmployees(updatedEmployees);
+        saveData(updatedEmployees);
+    };
+
     return (
         <Router>
             <div className="App">
@@ -23,9 +48,24 @@ function App() {
                 </nav>
 
                 <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/about" element={<About />} />
-                    <Route path="/employee" element={<EmployeeForm />} />
+                    <Route
+                        path="/"
+                        element={<Home />}
+                    />
+
+                    <Route
+                        path="/about"
+                        element={<About />}
+                    />
+
+                    <Route
+                        path="/employee"
+                        element={
+                            <EmployeeForm
+                                addEmployee={addEmployee}
+                            />
+                        }
+                    />
                 </Routes>
             </div>
         </Router>
