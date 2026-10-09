@@ -86,3 +86,33 @@
     color: white;
   }
   
+.employee-list {
+    margin: 30px auto;
+    padding: 20px;
+    max-width: 500px;
+    text-align: center;
+}
+
+.employee-list h2 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.employee-list ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.employee-list li {
+    margin: 12px 0;
+}
+
+.employee-list a {
+    color: #007bff;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.employee-list a:hover {
+    text-decoration: underline;
+}
